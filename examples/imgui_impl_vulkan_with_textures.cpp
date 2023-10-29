@@ -1265,7 +1265,7 @@ ImTextureID ImGui_ImplVulkan_AddTexture(VkSampler sampler, VkImageView image_vie
     alloc_info.descriptorSetCount = 1;
     alloc_info.pSetLayouts = &g_DescriptorSetLayout;
 
-    VkDescriptorSet descriptor_set = Kablunk::VulkanRendererAPI::RT_AllocateDescriptorSet(alloc_info);
+    VkDescriptorSet descriptor_set = kb::VulkanRendererAPI::RT_AllocateDescriptorSet(alloc_info);
     ImGui_ImplVulkan_UpdateTextureInfo(descriptor_set, sampler, image_view, image_layout);
     return (ImTextureID)descriptor_set;
 }
