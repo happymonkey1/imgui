@@ -49,7 +49,9 @@
 #include "imgui_impl_vulkan_with_textures.h"
 #include <stdio.h>
 
-#include "Platform/Vulkan/VulkanRendererAPI.h"
+#include "Kablunk/Core/Singleton.h"
+#include "Kablunk/Renderer/Renderer.h"
+#include "Platform/Vulkan/vulkan_render_backend.h"
 
 // Reusable buffers used for rendering 1 current in-flight frame, for ImGui_ImplVulkan_RenderDrawData()
 // [Please zero-clear before use!]
@@ -1265,7 +1267,11 @@ ImTextureID ImGui_ImplVulkan_AddTexture(VkSampler sampler, VkImageView image_vie
     alloc_info.descriptorSetCount = 1;
     alloc_info.pSetLayouts = &g_DescriptorSetLayout;
 
-    VkDescriptorSet descriptor_set = kb::VulkanRendererAPI::RT_AllocateDescriptorSet(alloc_info);
+    const auto& vulkan_render_backend = kb::Singleton<kb::render::Renderer>::get()
+        .get_render_backend()
+        .backend();
+
+    VkDescriptorSet descriptor_set = vulkan_render_backend->rt_allocate_descriptor_set(alloc_info);
     ImGui_ImplVulkan_UpdateTextureInfo(descriptor_set, sampler, image_view, image_layout);
     return (ImTextureID)descriptor_set;
 }
