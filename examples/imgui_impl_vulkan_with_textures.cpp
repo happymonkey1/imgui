@@ -50,8 +50,8 @@
 #include <stdio.h>
 
 #include "Kablunk/Core/Singleton.h"
-#include "Kablunk/Renderer/Renderer.h"
-#include "Platform/Vulkan/vulkan_render_backend.h"
+#include "Kablunk/renderer/Renderer.h"
+#include "Kablunk/renderer/backend/vulkan/vulkan_render_backend.h"
 
 // Reusable buffers used for rendering 1 current in-flight frame, for ImGui_ImplVulkan_RenderDrawData()
 // [Please zero-clear before use!]
